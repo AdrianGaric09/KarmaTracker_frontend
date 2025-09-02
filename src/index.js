@@ -1,1 +1,1 @@
-console.log("Hello world drugi puta")
+export { default } from "./services/api";
