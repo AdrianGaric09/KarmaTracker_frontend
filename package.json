@@ -5,9 +5,9 @@
   "description": "",
   "author": "",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "serve": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node -e \"const fs=require('fs');try{fs.unlinkSync('src/components/MenuPopup.vue')}catch(e){}\""
   },
@@ -19,28 +19,8 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/eslint-parser": "^7.12.16",
-    "@babel/preset-env": "^7.26.0",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.0.0"
   },
   "browserslist": [
     "> 1%",
