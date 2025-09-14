@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { addCredits } from '@/services/credits'
 export default {
   name: 'BaseWheel',
   emits: ['wheel-result', 'close'],
@@ -338,18 +339,129 @@ export default {
     },
     showResult(segment) {
       this.$emit('wheel-result', segment);
-      setTimeout(() => {
-        if (segment.value === 'crown' || segment.value === 'spin-again' || segment.value === 'instant-karma' || segment.value === 'no-karma') {
-          alert(`You won: ${segment.text}!`);
-        } else if (segment.value > 0) {
-          alert(`You gained ${segment.value} credits!`);
-        } else {
-          alert(`You lost ${Math.abs(segment.value)} credits!`);
-        }
-        if (this.variant === 'unlucky' && segment.value === 'spin-again') {
-          this.canRespin = true;
-        }
-      }, 500);
+      
+      
+      try {
+        const { markWheelSpun, addUserCredits } = require('@/services/userState.js');
+        markWheelSpun(segment);
+        
+        
+        setTimeout(() => {
+          if (segment.value === 'crown') {
+            // Promote user to winner status like admin would
+            (async () => {
+              try {
+                const { promoteToWinner } = require('@/services/userState.js');
+                const success = await promoteToWinner('Wheel of Fortune');
+                if (success) {
+                  alert(`🎉 ${segment.text}! You are now a winner!`);
+                } else {
+                  alert(`You won: ${segment.text}! (Already a winner)`);
+                }
+              } catch (error) {
+                console.error('Error promoting to winner:', error);
+                alert(`You won: ${segment.text}!`);
+              }
+            })();
+          } else if (segment.value === 'no-karma') {
+            // Set karma points to 0 and karma level to 5
+            try {
+              const { setUserKarmaPoints } = require('@/services/userState.js');
+              setUserKarmaPoints(0);
+              alert(`🎉 ${segment.text}! Your karma is now at level 5!`);
+            } catch (error) {
+              console.error('Error setting karma to 0:', error);
+              alert(`You won: ${segment.text}!`);
+            }
+          } else if (segment.value === 'instant-karma') {
+            // Demote user to loser status
+            (async () => {
+              try {
+                const { demoteToLoser } = require('@/services/userState.js');
+                const success = await demoteToLoser('Wheel of Misfortune');
+                if (success) {
+                  alert(`💀 ${segment.text}! You are now a loser!`);
+                } else {
+                  alert(`You got: ${segment.text}! (Already a loser or admin)`);
+                }
+              } catch (error) {
+                console.error('Error demoting to loser:', error);
+                alert(`You got: ${segment.text}!`);
+              }
+            })();
+          } else if (segment.value === 'spin-again') {
+            alert(`You won: ${segment.text}!`);
+          } else if (segment.value > 0) {
+            alert(`You gained ${segment.value} credits!`);
+            addUserCredits(segment.value);
+          } else {
+            alert(`You lost ${Math.abs(segment.value)} credits!`);
+            addUserCredits(segment.value); 
+          }
+          if (this.variant === 'unlucky' && segment.value === 'spin-again') {
+            this.canRespin = true;
+          }
+        }, 500);
+      } catch (error) {
+        console.debug('Failed to save wheel progress, using fallback', error);
+        
+        setTimeout(() => {
+          if (segment.value === 'crown') {
+            // Promote user to winner status like admin would
+            (async () => {
+              try {
+                const { promoteToWinner } = require('@/services/userState.js');
+                const success = await promoteToWinner('Wheel of Fortune');
+                if (success) {
+                  alert(`🎉 ${segment.text}! You are now a winner!`);
+                } else {
+                  alert(`You won: ${segment.text}! (Already a winner)`);
+                }
+              } catch (error) {
+                console.error('Error promoting to winner:', error);
+                alert(`You won: ${segment.text}!`);
+              }
+            })();
+          } else if (segment.value === 'no-karma') {
+            // Set karma points to 0 and karma level to 5
+            try {
+              const { setUserKarmaPoints } = require('@/services/userState.js');
+              setUserKarmaPoints(0);
+              alert(`🎉 ${segment.text}! Your karma is now at level 5!`);
+            } catch (error) {
+              console.error('Error setting karma to 0:', error);
+              alert(`You won: ${segment.text}!`);
+            }
+          } else if (segment.value === 'instant-karma') {
+            // Demote user to loser status
+            (async () => {
+              try {
+                const { demoteToLoser } = require('@/services/userState.js');
+                const success = await demoteToLoser('Wheel of Misfortune');
+                if (success) {
+                  alert(`💀 ${segment.text}! You are now a loser!`);
+                } else {
+                  alert(`You got: ${segment.text}! (Already a loser or admin)`);
+                }
+              } catch (error) {
+                console.error('Error demoting to loser:', error);
+                alert(`You got: ${segment.text}!`);
+              }
+            })();
+          } else if (segment.value === 'spin-again') {
+            alert(`You won: ${segment.text}!`);
+          } else if (segment.value > 0) {
+            alert(`You gained ${segment.value} credits!`);
+            addCredits(segment.value);
+          } else {
+            alert(`You lost ${Math.abs(segment.value)} credits!`);
+            addCredits(segment.value); 
+          }
+          if (this.variant === 'unlucky' && segment.value === 'spin-again') {
+            this.canRespin = true;
+          }
+        }, 500);
+      }
     },
     getSegmentStyle(index) {
       const angle = (index + 0.5) * this.segmentAngle;
