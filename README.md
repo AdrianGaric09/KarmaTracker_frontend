@@ -28,13 +28,13 @@ Korisnici počinju s početnim kreditima i karmom. Kroz različite aktivnosti i 
 **Profesor**: doc. dr. sc. Nikola Tanković  
 **Kreator**: Adrian Garić  
 
-## 🔗 Linkovi
+## Linkovi
 
 - **Figma Design**: [Link na Figmu](#)
 - **Dokumentacija**: [Link na Word dokument](#)
 - **Hostana Aplikacija**: [Link na aplikaciju](#)
 
-## 🌟 Poruka
+## Poruka
 
 *"Svaka odluka ima posljedice. U digitalnom svijetu, kao i u stvarnom, naše akcije oblikuju tko smo i kako nas drugi percipiraju. Karma Tracker je više od aplikacije - to je refleksija naše etičke odgovornosti u svijetu koji sve više ovisi o tehnologiji."*
 
