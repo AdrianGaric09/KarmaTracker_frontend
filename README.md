@@ -31,7 +31,7 @@ Korisnici počinju s početnim kreditima i karmom. Kroz različite aktivnosti i 
 ## Linkovi
 
 - **Figma Design**: [https://www.figma.com/proto/acROY8qPh0tenqOVHJW7O1/Karma-Tracker?node-id=6-4&t=IXpbmE6TdwIWW4MI-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=6%3A4&show-proto-sidebar=1](#)
-- **Dokumentacija**: [https://1drv.ms/w/c/5f72210d1e33ff87/Eb7IRiwV59xHnCGA4pQfDYYBGwEol2TZXhDl8SexsMgUXg?e=zK3NPj](#)
+- **Dokumentacija**: [https://1drv.ms/b/c/5f72210d1e33ff87/ERAi9w9kGYRFj_s5_LOOFigB6N_OXzNdGipGB9nVBL2vhA?e=aF0aIN](#)
 - **Hostana Aplikacija**: [karma-tracker-frontend.vercel.app](#)
 - **Youtube video**: [https://www.youtube.com/watch?v=3mLDW4nu_6E&ab_channel=AdrianGari%C4%87](#)
 
